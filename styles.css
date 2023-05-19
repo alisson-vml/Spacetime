@@ -10,12 +10,41 @@ body {
   font-family: "Roboto", sans-serif;
   display: grid;
   grid-template-areas: "profile timeline";
-  grid-template-columns: 1fr 1fr; /* divindo a pagina com a mesma metade igual para cada grid */
+  grid-template-columns: 1fr 1fr; /* divindo a página em duas metades iguais*/
   grid-template-rows: 100vh;
 }
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #2c2c31;
+}
+::-webkit-scrollbar-thumb {
+  background: #9e9ea0;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #776c97;
+}
+@keyframes entering {
+  from {
+    opacity: 0;
+    transform: translateY(-200px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 nav {
   padding: 64px;
   grid-area: timeline;
+  overflow-y: scroll; /*quando o conteudo não caber na vertical irá habilitar o scroll*/
+  animation: entering 0.7s ease-in-out;
+}
+:root {
+  font-size: 16px;
 }
 .memory {
   display: flex;
@@ -26,20 +55,33 @@ nav {
 }
 .memory small {
   color: #bebebf;
-  font-size: 12px;
+  font-size: 0.75rem;
 }
 .memory h1 {
   color: #eaeaea;
-  font-size: 32px;
+  font-size: 2rem;
 }
 .memory img {
   width: 100%;
   height: 280px;
   object-fit: cover; /*sempre manter a proporção de uma capa*/
   border-radius: 8px; /*arredondar as bordas*/
+  transition: transform 0.7s ease-in-out;
 }
+/*efeito de zoom*/
+.memory div {
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+.memory:hover img {
+  transform: scale(1.1);
+}
+/*fim_efeito*/
+
 .memory p {
-  font-size: 18px;
+  font-size: 1.2rem;
   color: #bebebf;
   line-height: 28px; /*espaçamento entre as linhas*/
 }
@@ -49,7 +91,55 @@ aside {
   flex-direction: column; /*para os elementos ficarem um embaixo do outro*/
   align-items: center;
   justify-content: center;
+  gap: 20px;
 
   border-right: 1px solid;
   border-image: linear-gradient(#f7f7f7, #2c2c31) 1;
+  background-image: url("./assets/background.svg");
+  background-position: top right;
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+}
+aside * {
+  animation: entering 0.7s ease-in-out;
+}
+
+aside img:nth-child(2) {
+  /*pegando a segunda imagem*/
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+
+  border: 4px solid transparent;
+  background: linear-gradient(#d39e33, #ed5636, #633bbc) padding-box,
+    linear-gradient(260deg, #d39e33, #ed5636, #633bbc) border-box;
+}
+aside p {
+  font-size: 2rem;
+  text-align: center;
+}
+aside span {
+  font-size: 0.75rem;
+  color: #9e9ea0;
+}
+/*deixando responsivo*/
+@media (max-width: 768px) {
+  :root {
+    font-size: 12px;
+  }
+  body {
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.2fr 0.8fr;
+    grid-template-areas:
+      "profile"
+      "timeline";
+  }
+  aside {
+    border-right: none;
+    padding: 32px 12px;
+  }
+  nav {
+    overflow-y: visible;
+    padding: 22px;
+  }
 }
