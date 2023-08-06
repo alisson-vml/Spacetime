@@ -10,7 +10,7 @@ Esse é um projeto é uma cápsula do tempo para exibir memoria em uma linha do 
 
 ## 🚀 Tecnologias
 
-Esse projeto foi deesenvolvido durante o NLW da Rocketseat com as seguintes tecnologias:
+Esse projeto foi desenvolvido durante o NLW da Rocketseat com as seguintes tecnologias:
 
 -HTML
 -CSS
